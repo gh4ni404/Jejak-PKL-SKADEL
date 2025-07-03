@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment"
+    android:id="@+id/nav_graph_auth">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@+id/action_registerFragment_to_completeProfileFragment"
+            app:destination="@id/completeProfileFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.completeprofile.CompleteProfileFragment"
+        android:label="Complete Profile"
+        tools:layout="@layout/fragment_complete_profile" />
+
+</navigation>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="headingTextColor" format="color" />
+    <attr name="secondaryTextColor" format="color" />
+    <attr name="hintTextColor" format="color" />
+    <attr name="disabledTextColor" format="color" />
+
+    <attr name="statusSuccessColor" format="color" />
+    <attr name="statusErrorColor" format="color" />
+    <attr name="statusWarningColor" format="color" />
+
+    <attr name="roleAdminColor" format="color" />
+    <attr name="roleGuruColor" format="color" />
+    <attr name="roleSiswaColor" format="color" />
+
+    <attr name="linkTextColor" format="color" />
+</resources>

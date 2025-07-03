@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Jejak PKL SKADEL</string>
+    <string name="desc_logo_txt">Logo Aplikasi</string>
+    <string name="welcome_auth">Welcome to Jejak PKL</string>
+    <string name="et_email">Email Address</string>
+    <string name="et_pass">Password</string>
+    <string name="login_desc">Dokumentasikan dan Unggah Pengalaman Magangmu secara Berkala</string>
+    <string name="et_name">Full Name</string>
+</resources>

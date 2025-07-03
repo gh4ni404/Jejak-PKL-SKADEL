@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.JejakPKLSKADEL" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Material default colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <!-- Custom dynamic attributes -->
+        <item name="headingTextColor">@color/primary</item>
+        <item name="secondaryTextColor">@color/secondary</item>
+        <item name="hintTextColor">@color/hint</item>
+        <item name="disabledTextColor">@color/disabled</item>
+
+        <item name="statusSuccessColor">@color/success</item>
+        <item name="statusErrorColor">@color/error</item>
+        <item name="statusWarningColor">@color/warning</item>
+
+        <item name="roleAdminColor">@color/admin</item>
+        <item name="roleGuruColor">@color/guru</item>
+        <item name="roleSiswaColor">@color/siswa</item>
+
+        <item name="linkTextColor">@color/link</item>
+    </style>
+
+    <style name="Theme.JejakPKLSKADEL" parent="Base.Theme.JejakPKLSKADEL" />
+</resources>

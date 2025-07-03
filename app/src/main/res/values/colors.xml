@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Material Default Colors -->
+    <color name="colorPrimary">#1D4ED8</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#111827</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+<!--    Text Colors -->
+    <color name="primary">#111827</color>
+    <color name="secondary">#6B7280</color>
+    <color name="hint">#9CA3AF</color>
+    <color name="disabled">#D1D5DB</color>
+
+<!--    Status Colors -->
+    <color name="error">#FF5A5F</color>
+    <color name="success">#00C48C</color>
+    <color name="warning">#FFC542</color>
+
+<!--    Link -->
+    <color name="link">#2D8CFF</color>
+
+<!--    Role Colors-->
+    <color name="admin">#1D4ED8</color>
+    <color name="guru">#059669</color>
+    <color name="siswa">#FBBF24</color>
+</resources>

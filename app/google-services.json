@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1037585181327",
+    "project_id": "jejak-pkl-skadel-464716",
+    "storage_bucket": "jejak-pkl-skadel-464716.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037585181327:android:a8f6d55f650df1743cdefa",
+        "android_client_info": {
+          "package_name": "com.smkn8bone.jejakpklskadel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Adq-ArmRVKlT91Eq-RLQZgxR_OPWTQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

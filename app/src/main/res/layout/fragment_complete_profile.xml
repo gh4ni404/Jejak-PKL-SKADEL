@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="24dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal" >
+
+            <!-- Title -->
+            <TextView
+                style="@style/Text.Heading"
+                android:id="@+id/tvTitleCompleteProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lengkapi profil kamu dulu"
+                android:layout_marginTop="16dp" />
+
+            <!-- Step Indicator -->
+            <TextView
+                style="@style/Text.Hint"
+                android:id="@+id/tvStepCompleteProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Langkah 2 dari 3"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Profile Picture -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfileCompleteProfile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                android:layout_marginBottom="12dp" />
+
+            <!--            Full Name -->
+            <EditText
+                android:id="@+id/etNameCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:layout_marginTop="12dp" />
+
+            <!--            Class -->
+            <Spinner
+                android:id="@+id/etClassCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <!--            Jurusan -->
+            <Spinner
+                android:id="@+id/etJurusanCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <!--            Nomor Telepon atau WA -->
+            <EditText
+                android:id="@+id/etPhoneCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor Telepon atau WA"
+                android:inputType="phone"
+                android:layout_marginTop="12dp" />
+
+            <!--            Email -->
+            <EditText
+                android:id="@+id/etEmailCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="12dp" />
+
+            <!--            Sekolah -->
+            <EditText
+                android:id="@+id/etSekolahCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="UPT SMKN 8 BONE"
+                android:enabled="false"
+                android:layout_marginTop="12dp" />
+
+            <!--            Save Button -->
+            <Button
+                android:id="@+id/btnSaveCompleteProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:layout_marginTop="24dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
