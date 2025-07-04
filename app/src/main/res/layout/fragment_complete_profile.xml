@@ -23,7 +23,7 @@
                 android:id="@+id/tvTitleCompleteProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lengkapi profil kamu dulu"
+                android:text="@string/title_complete_profile"
                 android:layout_marginTop="16dp" />
 
             <!-- Step Indicator -->
@@ -32,79 +32,165 @@
                 android:id="@+id/tvStepCompleteProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Langkah 2 dari 3"
+                android:text="@string/subtitle_complete_profile"
                 android:layout_marginBottom="24dp" />
 
             <!-- Profile Picture -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivProfileCompleteProfile"
+<!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:id="@+id/ivProfileCompleteProfile"-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:src="@drawable/ic_camera_overlay"-->
+<!--                android:background="@drawable/ic_user_default"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                app:shapeAppearanceOverlay="@style/CircleImage"-->
+<!--                android:layout_marginBottom="12dp" />-->
+            <FrameLayout
                 android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_camera_overlay"
-                android:background="@drawable/ic_user_default"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/CircleImage"
-                android:layout_marginBottom="12dp" />
+                android:layout_height="200dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivProfileCompleteProfile"
+                    android:layout_width="match_parent"
+                    android:background="?attr/colorOutlineOnSurface"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user_default"
+                    app:shapeAppearance="@style/CircleImage"
+                    android:contentDescription="@string/content_description_profile"
+                    android:outlineProvider="background" />
 
-            <!--            Full Name -->
-            <EditText
-                android:id="@+id/etNameCompleteProfile"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_camera_overlay"
+                    android:contentDescription="@string/content_description_editIcon"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"/>
+
+            </FrameLayout>
+
+            <!-- Full Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_name_complete_profile"
                 android:enabled="false"
                 android:inputType="textPersonName"
-                android:padding="12dp"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNameCompleteProfile"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Class -->
-            <Spinner
-                android:id="@+id/etClassCompleteProfile"
+            <!-- Class -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="10dp"
+                android:hint="@string/hint_class_choice"
+                app:endIconMode="dropdown_menu"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
+                    android:id="@+id/etClassCompleteProfile"
+                    android:hint="@string/hint_class_choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Jurusan -->
-            <Spinner
-                android:id="@+id/etJurusanCompleteProfile"
+            <!-- Jurusan -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="10dp"
+                android:hint="@string/hint_major_choice"
+                app:endIconMode="dropdown_menu"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
+                    android:id="@+id/etJurusanCompleteProfile"
+                    android:hint="@string/hint_major_choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Nomor Telepon atau WA -->
-            <EditText
-                android:id="@+id/etPhoneCompleteProfile"
+            <!-- Nomor Telepon atau WA -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nomor Telepon atau WA"
+                android:hint="@string/hint_phone_number"
                 android:inputType="phone"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="10dp" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhoneCompleteProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Email -->
-            <EditText
-                android:id="@+id/etEmailCompleteProfile"
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/et_email"
                 android:enabled="false"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tilFullName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailCompleteProfile"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Sekolah -->
-            <EditText
-                android:id="@+id/etSekolahCompleteProfile"
+            <!-- Sekolah -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSchoolName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="UPT SMKN 8 BONE"
+                android:hint="@string/hint_school_name"
                 android:enabled="false"
-                android:layout_marginTop="12dp" />
+                android:inputType="text"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tilFullName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSekolahCompleteProfile"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            Save Button -->
+            <!-- Save Button -->
             <Button
                 android:id="@+id/btnSaveCompleteProfile"
+                style="@style/Button.Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simpan"
-                android:layout_marginTop="24dp" />
+                android:text="@string/btn_save_text"
+                android:layout_marginTop="24dp"/>
+
         </LinearLayout>
     </ScrollView>
+
+    <com.smkn8bone.jejakpklskadel.components.loading.LoadingOverlayView
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
