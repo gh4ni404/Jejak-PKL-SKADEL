@@ -3,6 +3,7 @@
     <style name="Base.Theme.JejakPKLSKADEL" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
         <!-- Material default colors -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
@@ -24,6 +25,10 @@
         <item name="roleSiswaColor">@color/siswa</item>
 
         <item name="linkTextColor">@color/link</item>
+
+        <item name="colorOutlineOnSurface">#E5E7EB</item>
+
+        <item name="colorOverlayDim">#80000000</item>
     </style>
 
     <style name="Theme.JejakPKLSKADEL" parent="Base.Theme.JejakPKLSKADEL" />
