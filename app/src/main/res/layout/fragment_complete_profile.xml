@@ -9,9 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:padding="24dp" >
+        >
 
         <LinearLayout
+            android:padding="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -60,6 +61,7 @@
                     android:outlineProvider="background" />
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivSelectImageProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_camera_overlay"
@@ -79,13 +81,48 @@
                 android:hint="@string/hint_name_complete_profile"
                 android:enabled="false"
                 android:inputType="textPersonName"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="24dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNameCompleteProfile"
                     android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/et_email"
+                android:enabled="false"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tilFullName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailCompleteProfile"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Nomor Telepon atau WA -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_phone_number"
+                android:inputType="phone"
+                android:layout_marginTop="10dp" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhoneCompleteProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Class -->
@@ -110,7 +147,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/hint_major_choice"
-                app:endIconMode="dropdown_menu"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
                 <AutoCompleteTextView
                     android:id="@+id/etJurusanCompleteProfile"
@@ -120,59 +156,34 @@
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Nomor Telepon atau WA -->
+            <!-- Industri -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_phone_number"
-                android:inputType="phone"
-                android:layout_marginTop="10dp" >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPhoneCompleteProfile"
+                android:layout_marginTop="10dp"
+                android:hint="@string/hint_industry_choice"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
+                    android:id="@+id/etIndustryCompleteProfile"
+                    android:hint="@string/hint_industry_choice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Email -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmailLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/et_email"
-                android:enabled="false"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/tilFullName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmailCompleteProfile"
-                    android:enabled="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Sekolah -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilSchoolName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_school_name"
-                android:enabled="false"
-                android:inputType="text"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/tilFullName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-                <com.google.android.material.textfield.TextInputEditText
+                android:hint="@string/hint_school_choice"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
                     android:id="@+id/etSekolahCompleteProfile"
-                    android:enabled="false"
+                    android:hint="@string/hint_school_choice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Save Button -->
