@@ -12,9 +12,10 @@
     <string name="content_description_editIcon">Edit Icon</string>
     <string name="hint_name_complete_profile">Nama Lengkap Kamu</string>
     <string name="hint_class_choice">Pilih Kelas kamu</string>
-    <string name="hint_major_choice">Pilih Jurusan kamu</string>
+    <string name="hint_major_choice">Jurusan kamu</string>
+    <string name="hint_industry_choice">Pilih Industri kamu</string>
     <string name="hint_phone_number">Nomor Telepon atau WA</string>
-    <string name="hint_school_name">UPT SMKN 8 BONE</string>
+    <string name="hint_school_choice">Pilih sekolah kamu</string>
     <string name="btn_save_text">simpan</string>
     <string name="btn_google_signIn_text">Log in with Google</string>
     <string name="tv_or">OR</string>
