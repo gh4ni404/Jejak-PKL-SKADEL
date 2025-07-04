@@ -6,4 +6,21 @@
     <string name="et_pass">Password</string>
     <string name="login_desc">Dokumentasikan dan Unggah Pengalaman Magangmu secara Berkala</string>
     <string name="et_name">Full Name</string>
+    <string name="title_complete_profile">Lengkapi profil kamu dulu</string>
+    <string name="subtitle_complete_profile">Langkah 2 dari 3</string>
+    <string name="content_description_profile">Default Profile</string>
+    <string name="content_description_editIcon">Edit Icon</string>
+    <string name="hint_name_complete_profile">Nama Lengkap Kamu</string>
+    <string name="hint_class_choice">Pilih Kelas kamu</string>
+    <string name="hint_major_choice">Pilih Jurusan kamu</string>
+    <string name="hint_phone_number">Nomor Telepon atau WA</string>
+    <string name="hint_school_name">UPT SMKN 8 BONE</string>
+    <string name="btn_save_text">simpan</string>
+    <string name="btn_google_signIn_text">Log in with Google</string>
+    <string name="tv_or">OR</string>
+    <string name="btn_login_text">login</string>
+    <string name="tv_to_register">Belum punya akun? Register</string>
+    <string name="title_register">Daftar Jejak PKL</string>
+    <string name="btn_register_text">daftar</string>
+    <string name="tv_to_login">Sudah punya akun? Login</string>
 </resources>
