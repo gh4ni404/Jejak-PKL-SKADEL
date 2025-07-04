@@ -24,6 +24,11 @@
         <item name="roleSiswaColor">@color/siswa</item>
 
         <item name="linkTextColor">@color/link</item>
+
+        <item name="colorOutlineOnSurface">#2B50EC</item>
+
+        <item name="colorOverlayDim">#80FFFFFF</item>
+
     </style>
 
     <style name="Theme.JejakPKLSKADEL" parent="Base.Theme.JejakPKLSKADEL" />
