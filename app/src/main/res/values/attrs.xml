@@ -14,4 +14,6 @@
     <attr name="roleSiswaColor" format="color" />
 
     <attr name="linkTextColor" format="color" />
+    <attr name="colorOutlineOnSurface" format="color" />
+    <attr name="colorOverlayDim" format="color" />
 </resources>
