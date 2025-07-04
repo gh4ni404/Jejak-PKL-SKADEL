@@ -217,10 +217,25 @@ class CompleteProfileFragment : Fragment() {
         val driveService = DriveServiceHelper.getDriveService(requireContext()) ?: return
         val sharedFolderId = "1euMwZDqrcKembVtpnim5pI0AMBwQqU-3"
 
+        binding.loadingOverlay.show()
         DriveServiceHelper.checkFolderProfile(driveService, sharedFolderId) { folderId ->
             folderId?.let {
                 viewModel.uploadImageToDrive(requireContext(), uri, it) { imageUri ->
-                    viewModel.setUploadedImageUri(imageUri)
+                    requireActivity().runOnUiThread {
+
+                        if(imageUri != null) {
+                            binding.loadingOverlay.hide()
+                            viewModel.setUploadedImageUri(imageUri)
+                        } else {
+                            binding.loadingOverlay.show()
+                            Toast.makeText(requireContext(), "Gagal upload gambar", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } ?: run {
+                requireActivity().runOnUiThread {
+                    binding.loadingOverlay.show()
+                    Toast.makeText(requireContext(), "Folder tidak ditemukan", Toast.LENGTH_SHORT).show()
                 }
             }
         }
