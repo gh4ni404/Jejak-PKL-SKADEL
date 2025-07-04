@@ -37,11 +37,11 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(requireContext(), "Semua field harus diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            binding.progressBar.visibility = View.VISIBLE
+            binding.loadingOverlay.show()
             binding.btnRegister.isEnabled = false
 
             viewMode.register(name, email, password) { success, message ->
-                binding.progressBar.visibility = View.GONE
+                binding.loadingOverlay.hide()
                 binding.btnRegister.isEnabled = true
                 if (success) {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
