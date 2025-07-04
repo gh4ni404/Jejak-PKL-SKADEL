@@ -38,6 +38,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/DEPENDENCIES"
+        }
+    }
 }
 
 dependencies {
@@ -48,13 +53,13 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
 
-//    HTTP Client Dependency
-    implementation(libs.okhttp)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.retrofit2.kotlin.coroutines.adapter)
+    // Google Drive API + auth (via Service Account)
+    implementation(libs.google.api.client.android)
+//    implementation("com.google.api-client:google-api-client-android:1.34.0")
+    implementation(libs.google.api.client.gson)
+    implementation(libs.google.http.client.gson)
+    implementation(libs.google.api.services.drive)
+    implementation(libs.google.auth.library.oauth2.http)
 
 //    General Dependency
     implementation(libs.androidx.core.ktx)
