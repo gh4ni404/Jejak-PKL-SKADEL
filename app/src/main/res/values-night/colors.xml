@@ -1,29 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    Material Default Colors -->
-        <color name="colorPrimary">#60A5FA</color>
-        <color name="colorOnPrimary">#111827</color>
-        <color name="colorSurface">#111827</color>
-        <color name="colorOnSurface">#FFFFFF</color>
+<!--&lt;!&ndash;    Material Default Colors &ndash;&gt;-->
+<!--        <color name="colorPrimary">#60A5FA</color>-->
+<!--        <color name="colorOnPrimary">#111827</color>-->
+<!--        <color name="colorSurface">#111827</color>-->
+<!--        <color name="colorOnSurface">#FFFFFF</color>-->
 
-        <color name="black">#FF000000</color>
-        <color name="white">#FFFFFFFF</color>
-        <!--    Text Colors -->
-        <color name="primary">#FFFFFF</color>
-        <color name="secondary">#D1D5DB</color>
+<!--        <color name="black">#FF000000</color>-->
+<!--        <color name="white">#FFFFFFFF</color>-->
+<!--        &lt;!&ndash;    Text Colors &ndash;&gt;-->
+<!--        <color name="primary">#FFFFFF</color>-->
+<!--        <color name="secondary">#D1D5DB</color>-->
+<!--        <color name="hint">#9CA3AF</color>-->
+<!--        <color name="disabled">#6B7280</color>-->
+
+<!--        &lt;!&ndash;    Status Colors &ndash;&gt;-->
+<!--        <color name="error">#FF5A5F</color>-->
+<!--        <color name="success">#00C48C</color>-->
+<!--        <color name="warning">#FFC542</color>-->
+
+<!--        &lt;!&ndash;    Link &ndash;&gt;-->
+<!--        <color name="link">#60A5FA</color>-->
+
+<!--        &lt;!&ndash;    Role Colors&ndash;&gt;-->
+<!--        <color name="admin">#60A5FA</color>-->
+<!--        <color name="guru">#34D399</color>-->
+<!--        <color name="siswa">#FACC15</color>-->
+
+        <!-- Primary Brand Colors -->
+        <color name="colorPrimary">#93C5FD</color>
+        <color name="colorOnPrimary">#002F65</color>
+        <color name="colorPrimaryContainer">#1E3A8A</color>
+        <color name="colorOnPrimaryContainer">#DBEAFE</color>
+
+        <!-- Secondary -->
+        <color name="colorSecondary">#A5B4FC</color>
+        <color name="colorOnSecondary">#1E1B4B</color>
+        <color name="colorSecondaryContainer">#312E81</color>
+        <color name="colorOnSecondaryContainer">#E0E7FF</color>
+
+        <!-- Tertiary -->
+        <color name="colorTertiary">#6EE7B7</color>
+        <color name="colorOnTertiary">#064E3B</color>
+        <color name="colorTertiaryContainer">#065F46</color>
+        <color name="colorOnTertiaryContainer">#D1FAE5</color>
+
+        <!-- Neutral -->
+        <color name="colorSurface">#1F2937</color>
+        <color name="colorOnSurface">#F9FAFB</color>
+        <color name="colorBackground">#111827</color>
+        <color name="colorOnBackground">#F3F4F6</color>
+
+        <!-- Neutral Variant -->
+        <color name="colorOutline">#4B5563</color>
+        <color name="colorSurfaceVariant">#374151</color>
+        <color name="colorOnSurfaceVariant">#D1D5DB</color>
+
+        <!-- Status Colors -->
+        <color name="success">#34D399</color>
+        <color name="error">#F87171</color>
+        <color name="warning">#FBBF24</color>
+        <color name="info">#60A5FA</color>
+
+        <!-- Role-based -->
+        <color name="admin">#60A5FA</color>
+        <color name="guru">#4ADE80</color>
+        <color name="siswa">#FDE047</color>
+
+        <!-- Misc -->
+        <color name="link">#93C5FD</color>
         <color name="hint">#9CA3AF</color>
         <color name="disabled">#6B7280</color>
-
-        <!--    Status Colors -->
-        <color name="error">#FF5A5F</color>
-        <color name="success">#00C48C</color>
-        <color name="warning">#FFC542</color>
-
-        <!--    Link -->
-        <color name="link">#60A5FA</color>
-
-        <!--    Role Colors-->
-        <color name="admin">#60A5FA</color>
-        <color name="guru">#34D399</color>
-        <color name="siswa">#FACC15</color>
 </resources>
