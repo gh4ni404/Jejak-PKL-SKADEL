@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="headingTextColor" format="color" />
-    <attr name="secondaryTextColor" format="color" />
-    <attr name="hintTextColor" format="color" />
-    <attr name="disabledTextColor" format="color" />
+    <attr name="colorBackground" format="color" />
+    <attr name="colorSuccess" format="color" />
+    <attr name="colorWarning" format="color" />
+    <attr name="colorInfo" format="color" />
 
-    <attr name="statusSuccessColor" format="color" />
-    <attr name="statusErrorColor" format="color" />
-    <attr name="statusWarningColor" format="color" />
+    <attr name="colorAdmin" format="color" />
+    <attr name="colorGuru" format="color" />
+    <attr name="colorSiswa" format="color" />
 
-    <attr name="roleAdminColor" format="color" />
-    <attr name="roleGuruColor" format="color" />
-    <attr name="roleSiswaColor" format="color" />
+    <attr name="colorLink" format="color" />
+    <attr name="colorHint" format="color" />
+    <attr name="colorDisabled" format="color" />
 
     <attr name="linkTextColor" format="color" />
     <attr name="colorOutlineOnSurface" format="color" />
     <attr name="colorOverlayDim" format="color" />
+
+
 </resources>
