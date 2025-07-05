@@ -1,29 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    Material Default Colors -->
-    <color name="colorPrimary">#1D4ED8</color>
+<!--&lt;!&ndash;    Material Default Colors &ndash;&gt;-->
+<!--    <color name="colorPrimary">#1D4ED8</color>-->
+<!--    <color name="colorOnPrimary">#FFFFFF</color>-->
+<!--    <color name="colorSurface">#FFFFFF</color>-->
+<!--    <color name="colorOnSurface">#111827</color>-->
+
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+<!--&lt;!&ndash;    Text Colors &ndash;&gt;-->
+<!--    <color name="primary">#111827</color>-->
+<!--    <color name="secondary">#6B7280</color>-->
+<!--    <color name="hint">#9CA3AF</color>-->
+<!--    <color name="disabled">#D1D5DB</color>-->
+
+<!--&lt;!&ndash;    Status Colors &ndash;&gt;-->
+<!--    <color name="error">#FF5A5F</color>-->
+<!--    <color name="success">#00C48C</color>-->
+<!--    <color name="warning">#FFC542</color>-->
+
+<!--&lt;!&ndash;    Link &ndash;&gt;-->
+<!--    <color name="link">#2D8CFF</color>-->
+
+<!--&lt;!&ndash;    Role Colors&ndash;&gt;-->
+<!--    <color name="admin">#1D4ED8</color>-->
+<!--    <color name="guru">#059669</color>-->
+<!--    <color name="siswa">#FBBF24</color>-->
+
+    <!-- Primary Brand Colors -->
+    <color name="colorPrimary">#3B82F6</color>
     <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#DCEBFF</color>
+    <color name="colorOnPrimaryContainer">#002F65</color>
+
+    <!-- Secondary (optional) -->
+    <color name="colorSecondary">#6366F1</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#E0E7FF</color>
+    <color name="colorOnSecondaryContainer">#1E1B4B</color>
+
+    <!-- Tertiary (optional accent, e.g. for CTA buttons) -->
+    <color name="colorTertiary">#10B981</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorTertiaryContainer">#D1FAE5</color>
+    <color name="colorOnTertiaryContainer">#064E3B</color>
+
+    <!-- Neutral for surfaces and text -->
     <color name="colorSurface">#FFFFFF</color>
-    <color name="colorOnSurface">#111827</color>
+    <color name="colorOnSurface">#1F2937</color>
+    <color name="colorBackground">#F9FAFB</color>
+    <color name="colorOnBackground">#111827</color>
 
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-<!--    Text Colors -->
-    <color name="primary">#111827</color>
-    <color name="secondary">#6B7280</color>
+    <!-- Neutral Variant for borders/outlines -->
+    <color name="colorOutline">#D1D5DB</color>
+    <color name="colorSurfaceVariant">#F3F4F6</color>
+    <color name="colorOnSurfaceVariant">#6B7280</color>
+
+    <!-- Status Colors -->
+    <color name="success">#10B981</color>
+    <color name="error">#EF4444</color>
+    <color name="warning">#F59E0B</color>
+    <color name="info">#3B82F6</color>
+
+    <!-- Role-based Colors -->
+    <color name="admin">#3B82F6</color>
+    <color name="guru">#22C55E</color>
+    <color name="siswa">#FACC15</color>
+
+    <!-- Misc -->
+    <color name="link">#2563EB</color>
     <color name="hint">#9CA3AF</color>
-    <color name="disabled">#D1D5DB</color>
-
-<!--    Status Colors -->
-    <color name="error">#FF5A5F</color>
-    <color name="success">#00C48C</color>
-    <color name="warning">#FFC542</color>
-
-<!--    Link -->
-    <color name="link">#2D8CFF</color>
-
-<!--    Role Colors-->
-    <color name="admin">#1D4ED8</color>
-    <color name="guru">#059669</color>
-    <color name="siswa">#FBBF24</color>
+    <color name="disabled">#E5E7EB</color>
 </resources>
