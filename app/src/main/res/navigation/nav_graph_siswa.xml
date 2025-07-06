@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/dashboardStudentFragment"
+    android:id="@+id/nav_graph_siswa">
+
+    <fragment
+        android:id="@+id/dashboardStudentFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.dashboard.DashboardStudentFragment"
+        android:label="Dashboard Student"
+        tools:layout="@layout/fragment_dashboard_student" />
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.upload.UploadFragment"
+        android:label="Upload"
+        tools:layout="@layout/fragment_upload" />
+
+    <fragment
+        android:id="@+id/historyStudentFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.history.HistoryStudentFragment"
+        android:label="History Student"
+        tools:layout="@layout/fragment_history_student" />
+
+    <fragment
+        android:id="@+id/profileStudentFragment"
+        android:name="com.smkn8bone.jejakpklskadel.ui.profile.ProfileStudentFragment"
+        android:label="Upload"
+        tools:layout="@layout/fragment_profile_student" />
+
+</navigation>
