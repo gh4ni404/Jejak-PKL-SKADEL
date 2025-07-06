@@ -43,10 +43,14 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Semua field harus diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            binding.loadingOverlay.show()
+            binding.btnLogin.isEnabled = false
 
             viewModel.login(email, password) { success, message, isProfileCompleted ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
+                binding.loadingOverlay.hide()
+                binding.btnLogin.isEnabled = true
                 if (success) {
                     val intent = if (isProfileCompleted) {
                         Intent(requireContext(), MainActivity::class.java)
