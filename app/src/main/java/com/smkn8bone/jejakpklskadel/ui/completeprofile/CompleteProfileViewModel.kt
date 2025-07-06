@@ -15,22 +15,29 @@ class CompleteProfileViewModel : ViewModel() {
     private var currentName: String? = null
 
     fun fetchUserData (
-        onResult: (String?, String?) -> Unit
+        onResult: (String?, String?,String?, String?,String?, String?,String?, String?) -> Unit
     ) {
-        val uid = auth.currentUser?.uid ?: return onResult(null, null)
+        val uid = auth.currentUser?.uid ?: return onResult(null, null, null, null, null, null, null, null)
         firestore.collection ("users").document (uid).get()
             .addOnSuccessListener { doc ->
                 if (doc != null && doc.exists()) {
                     val name = doc.getString("name")
                     val email = doc.getString("email")
+                    val phone = doc.getString("phone")
+                    val kelas = doc.getString("kelas")
+                    val jurusan = doc.getString("jurusan")
+                    val industri = doc.getString("industri")
+                    val guruPembimbing = doc.getString("guru_pembimbing")
+                    val sekolah = doc.getString("sekolah")
+
                     currentName = name
-                    onResult(name, email)
+                    onResult(name, email, phone, kelas, jurusan, industri, guruPembimbing, sekolah)
                 } else {
-                    onResult(null, null)
+                    onResult(null, null, null, null, null, null, null, null)
                 }
             }
             .addOnFailureListener {
-                onResult(null, null)
+                onResult(null, null, null, null, null, null, null, null)
             }
     }
 
@@ -69,6 +76,7 @@ class CompleteProfileViewModel : ViewModel() {
         selectedKelas: String,
         selectedJurusan: String,
         selectedIndustri: String,
+        selectedTeacher: String,
         phoneNumber: String,
         schoolName: String,
         onResult: (Boolean, String) -> Unit
@@ -79,9 +87,10 @@ class CompleteProfileViewModel : ViewModel() {
             "kelas" to selectedKelas,
             "jurusan" to selectedJurusan,
             "industri" to selectedIndustri,
+            "guru_pembimbing" to selectedTeacher,
             "phone" to phoneNumber,
             "sekolah" to schoolName,
-            "image_profile" to (uploadedImageUri ?: "default_image_url")
+            "image_profile" to uploadedImageUri
         )
         firestore.collection("users").document(uid).update(data)
             .addOnSuccessListener { onResult(true, "Profil berhasil dilengkapi") }
