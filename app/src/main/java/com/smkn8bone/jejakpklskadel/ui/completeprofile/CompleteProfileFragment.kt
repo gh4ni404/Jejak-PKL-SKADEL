@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +34,57 @@ class CompleteProfileFragment : Fragment() {
     private lateinit var cameraImageUri: Uri
     private var selectedImageUri: Uri? = null
 
+//    private val dataKelas = mapOf (
+//        "XII DKV" to Pair ("Desain Komunikasi Visual", listOf("Item A", "Item B", "Item C")),
+//        "XII MPLB" to Pair ("Manajemen Perkantoran dan Layanan Bisnis", listOf("Item 1", "Item 2", "Item 3")),
+//        "XII AT" to Pair ("Agribisnis Tanaman", listOf("Item I", "Item II", "Item III"))
+//    )
+
     private val dataKelas = mapOf (
-        "XII DKV" to Pair ("Desain Komunikasi Visual", listOf("Item A", "Item B", "Item C")),
-        "XII MPLB" to Pair ("Manajemen Perkantoran dan Layanan Bisnis", listOf("Item 1", "Item 2", "Item 3")),
-        "XII AT" to Pair ("Agribisnis Tanaman", listOf("Item I", "Item II", "Item III"))
+        "XII DKV" to KelasData ("Desain Komunikasi Visual",
+            listOf(
+                IndustriData("Percetakan FIKHA", listOf("Muh. Haris, S. T")),
+                IndustriData("WIM Printing", listOf("Mohd. Abdul Ghani, S. Kom", "A. Yulismayasanti, S. Pd")),
+                IndustriData("Faizal Digital Printing", listOf("Marlina, S. Pd")),
+                IndustriData("Unit Prod DKV", listOf("Rahmi Damayanti Nur DP, S. Pd")),
+                IndustriData("BRI Unit Uloe", listOf("A. Yulismayasanti, S. Pd")),
+                IndustriData("Kantor Desa Welado", listOf("Sapril, S. Pd")),
+                IndustriData("Kantor Desa P. Pute", listOf("Besse Tenri, S. Pd"))
+            )
+        ),
+        "XII MPLB" to KelasData ("Manajemen Perkantoran dan Layanan Bisnis",
+            listOf(
+                IndustriData("Kantor Camat Ajangale", listOf("Rahmawati, S. Sos")),
+                IndustriData("BKKBN Ajangale", listOf("Rahmawati, S. Sos")),
+                IndustriData("Kantor Desa Welado", listOf("Herlina, S. Sos")),
+                IndustriData("SMKN 8 Bone", listOf("Herlina, S. Sos")),
+                IndustriData("SMPN 2 Ajangale", listOf("Herlina, S. Sos")),
+                IndustriData("MTsN 2 Bone", listOf("Titik Sulistiawati, S. Pd")),
+                IndustriData("BRI Pompanua", listOf("Titik Sulistiawati, S. Pd")),
+                IndustriData("KUA Ajangale", listOf("Titik Sulistiawati, S. Pd")),
+                IndustriData("Puskesmas Ajangale", listOf("Nur Illang, S. Pd")),
+                IndustriData("Kantor Camat Dua Boccoe", listOf("Nur Illang, S. Pd")),
+                IndustriData("SMKN 8 Bone", listOf("Nur Illang, S. Pd"))
+            )
+        ),
+        "XII AT" to KelasData ("Agribisnis Tanaman",
+            listOf(
+                IndustriData("P4S Lampoko", listOf("Elite Gizwati Samudry, S. Pd", "Sulfadli, S. Pd. I")),
+                IndustriData("BPP Dua Boccoe", listOf("Jufri Adi Ya Fadli, S. Pd")),
+                IndustriData("BPP Ajangale", listOf("Jufri Adi Ya Fadli, S. Pd", "A. Eva Kusumanegara, S. Pd", "Jumiati Enre, S.Pd")),
+                IndustriData("Unit Prod DKV", listOf("Rahmi Damayanti Nur DP, S. Pd"))
+            )
+        )
+    )
+
+    data class KelasData (
+        val jurusan: String,
+        val industri: List<IndustriData>
+    )
+
+    data class IndustriData (
+        val namaIndustri: String,
+        val guruPembimbing: List<String>
     )
 
     private val takePictureLauncher = registerForActivityResult (ActivityResultContracts.TakePicture()) { success ->
@@ -86,10 +134,11 @@ class CompleteProfileFragment : Fragment() {
             val selectedKelas = binding.etClassCompleteProfile.text.toString().trim()
             val selectedJurusan = binding.etJurusanCompleteProfile.text.toString().trim()
             val selectedIndustri = binding.etIndustryCompleteProfile.text.toString().trim()
+            val selectedTeacher = binding.etGuruPembimbingCompleteProfile.text.toString().trim()
             val phoneNumber = binding.etPhoneCompleteProfile.text.toString().trim()
             val schoolName = binding.etSekolahCompleteProfile.text.toString().trim()
 
-            if (selectedKelas.isEmpty() || selectedJurusan.isEmpty() || selectedIndustri.isEmpty() || phoneNumber.isEmpty()) {
+            if (selectedKelas.isEmpty() || selectedJurusan.isEmpty() || selectedIndustri.isEmpty() || selectedTeacher.isEmpty() || phoneNumber.isEmpty()) {
                 Toast.makeText(requireContext(), "Mohon isi semua data", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -98,6 +147,7 @@ class CompleteProfileFragment : Fragment() {
                 selectedKelas,
                 selectedJurusan,
                 selectedIndustri,
+                selectedTeacher,
                 phoneNumber,
                 schoolName
             ) { success, message ->
@@ -124,16 +174,38 @@ class CompleteProfileFragment : Fragment() {
         binding.etClassCompleteProfile.setAdapter (adapterClass)
         binding.etClassCompleteProfile.setOnItemClickListener {_, _, position, _ ->
             val selectedClass = classList[position]
-            val (jurusan, industri) = dataKelas[selectedClass] ?: return@setOnItemClickListener
+            val kelasData = dataKelas[selectedClass] ?: return@setOnItemClickListener
+            val industri = kelasData.industri.map { it.namaIndustri }
             val adapterIndustri = ArrayAdapter (
                 requireContext(),
                 com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
                 industri
             )
 
-            binding.etJurusanCompleteProfile.setText(jurusan, false)
+            binding.etJurusanCompleteProfile.setText(kelasData.jurusan, false)
             binding.etIndustryCompleteProfile.setAdapter (adapterIndustri)
             binding.etIndustryCompleteProfile.setText("", false)
+
+            binding.etIndustryCompleteProfile.setOnItemClickListener { _, _, industryPosition, _ ->
+                val selectedIndustry = kelasData.industri[industryPosition]
+                val adapterGuru = ArrayAdapter (
+                    requireContext(),
+                    com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+                    selectedIndustry.guruPembimbing
+                )
+
+                Log.d("guru", selectedIndustry.guruPembimbing.size.toString())
+                Log.d("guru", selectedIndustry.guruPembimbing[0])
+                if (selectedIndustry.guruPembimbing.size == 1) {
+                    binding.etGuruPembimbingCompleteProfile.setText(selectedIndustry.guruPembimbing[0], false)
+                    binding.etGuruPembimbingCompleteProfile.setAdapter(null)
+                } else {
+                    binding.etGuruPembimbingCompleteProfile.setAdapter(adapterGuru)
+                    binding.etGuruPembimbingCompleteProfile.setText("", false)
+                }
+
+
+            }
         }
 
         val dataSekolah = listOf ("SMKN 8 Bone")
@@ -161,10 +233,16 @@ class CompleteProfileFragment : Fragment() {
     }
 
     private fun observeUserData() {
-        viewModel.fetchUserData { name, email ->
-            if (name != null && email != null) {
+        viewModel.fetchUserData { name, email, phone, kelas, jurusan, industri, guruPembimbing, sekolah ->
+            if (name != null && email != null || phone != null || kelas != null || jurusan != null || industri != null || guruPembimbing != null || sekolah != null) {
                 binding.etNameCompleteProfile.setText(name)
                 binding.etEmailCompleteProfile.setText(email)
+                binding.etPhoneCompleteProfile.setText(phone)
+                binding.etClassCompleteProfile.setText(kelas)
+                binding.etJurusanCompleteProfile.setText(jurusan)
+                binding.etIndustryCompleteProfile.setText(industri)
+                binding.etGuruPembimbingCompleteProfile.setText(guruPembimbing)
+                binding.etSekolahCompleteProfile.setText(sekolah)
             }
         }
     }
