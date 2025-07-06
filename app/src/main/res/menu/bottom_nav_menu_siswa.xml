@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardStudentFragment"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_home" />
+    <item
+        android:id="@+id/uploadFragment"
+        android:title="@string/title_upload"
+        android:icon="@drawable/ic_upload" />
+    <item
+        android:id="@+id/historyStudentFragment"
+        android:title="@string/title_history"
+        android:icon="@drawable/ic_history" />
+    <item
+        android:id="@+id/profileStudentFragment"
+        android:title="@string/title_profile"
+        android:icon="@drawable/ic_settings" />
+
+</menu>
