@@ -51,16 +51,19 @@ class SplashActivity : AppCompatActivity() {
                             }
                         }
                         startActivity(nextIntent)
+                        finish()
                     }
                     .addOnFailureListener {
                         startActivity(
-                            Intent(this@SplashActivity, AuthActivity::class.java)
+                            Intent(this, AuthActivity::class.java)
                         )
+                        finish()
                     }
             } else {
                 startActivity(
-                    Intent(this@SplashActivity, AuthActivity::class.java)
+                    Intent(this, AuthActivity::class.java)
                 )
+                finish()
             }
 //            startActivity(
 //                Intent(this, if (user == null) AuthActivity::class.java else MainActivity::class.java)
