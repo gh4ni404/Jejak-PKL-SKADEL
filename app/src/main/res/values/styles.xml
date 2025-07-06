@@ -9,6 +9,16 @@
     </style>
 
 <!--    LOGIN/REGISTER -->
+<!--    <style name="Text.Heading" parent="TextAppearance.Material3.TitleLarge">-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">?attr/colorOnSurface</item>-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--    </style>-->
+<!--    <style name="Text.Subheading" parent="TextAppearance.Material3.BodyLarge">-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>-->
+<!--    </style>-->
+
     <style name="Text.Heading" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
@@ -18,6 +28,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
     </style>
+
     <style name="Text.Label" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/colorHint</item>
@@ -43,10 +54,11 @@
     </style>
 
 <!--    Main Page -->
-    <style name="Text.Body" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?attr/colorOnSurface</item>
-    </style>
+<!--    <style name="Text.Body" parent="TextAppearance.Material3.BodyLarge">-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--        <item name="android:textColor">?attr/colorOnSurface</item>-->
+<!--    </style>-->
+    <style name="Text.Body" parent="TextAppearance.Material3.BodyMedium" />
     <style name="Text.Secondary" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textColor">@color/colorOnSurfaceVariant</item>
     </style>
@@ -94,5 +106,23 @@
         <item name="cornerRadius">8dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Button.Filled" parent="Widget.Material3.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.CardMenu" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
     </style>
 </resources>
