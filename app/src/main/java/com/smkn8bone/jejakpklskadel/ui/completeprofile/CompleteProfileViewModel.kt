@@ -51,9 +51,9 @@ class CompleteProfileViewModel : ViewModel() {
                 val fileName = "profile_${safeName}_$uid.jpg"
 
                 val fileId = DriveServiceHelper.uploadFile(driveService, compressedFile, fileName, parentFolderId)
-                val fileUrl = "https://drive.google.com/uc?id=$fileId"
+//                val fileUrl = "https://drive.google.com/uc?id=$fileId"
 
-                onUploaded(fileUrl)
+                onUploaded(fileId)
             } catch (e: Exception) {
                 e.printStackTrace()
                 onUploaded(null)
