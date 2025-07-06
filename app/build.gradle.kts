@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.google.api.services.drive)
     implementation(libs.google.auth.library.oauth2.http)
 
+//    Glide
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+
 //    General Dependency
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
