@@ -43,7 +43,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivProfileCompleteProfile"
                     android:layout_width="match_parent"
-                    android:background="?attr/colorOutlineOnSurface"
+                    android:background="?attr/colorOutline"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_user_default"
