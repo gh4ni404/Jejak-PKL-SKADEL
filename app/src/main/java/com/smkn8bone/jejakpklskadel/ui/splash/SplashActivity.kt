@@ -29,7 +29,6 @@ class SplashActivity : AppCompatActivity() {
                 .loadAnimation(this, R.anim.scale_animation)
         )
 
-
         Handler(Looper.getMainLooper()).postDelayed({
             binding.splashRootLayout.startAnimation(
                 AnimationUtils.loadAnimation(this, R.anim.fade_out)
