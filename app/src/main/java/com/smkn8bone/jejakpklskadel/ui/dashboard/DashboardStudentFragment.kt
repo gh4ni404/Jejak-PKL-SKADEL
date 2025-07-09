@@ -11,8 +11,9 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.smkn8bone.jejakpklskadel.AuthActivity
-import com.smkn8bone.jejakpklskadel.databinding.FragmentDashboardStudentBinding
+import com.smkn8bone.jejakpklskadel.MainActivity
 import com.smkn8bone.jejakpklskadel.R
+import com.smkn8bone.jejakpklskadel.databinding.FragmentDashboardStudentBinding
 
 class DashboardStudentFragment : Fragment() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -64,7 +65,8 @@ class DashboardStudentFragment : Fragment() {
         // Navigasi ke menu Upload
         binding.cardUpload.setOnClickListener {
             // Gunakan Navigation Component
-            // findNavController().navigate(R.id.action_dashboard_to_upload)
+//             findNavController().navigate(R.id.action_dashboard_to_upload)
+            (requireActivity() as MainActivity).getBottomNavView().selectedItemId = R.id.uploadFragment
         }
 
         // Navigasi ke menu History
