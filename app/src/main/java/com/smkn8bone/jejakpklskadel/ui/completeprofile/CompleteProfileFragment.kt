@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -186,8 +185,6 @@ class CompleteProfileFragment : Fragment() {
                     selectedIndustry.guruPembimbing
                 )
 
-                Log.d("guru", selectedIndustry.guruPembimbing.size.toString())
-                Log.d("guru", selectedIndustry.guruPembimbing[0])
                 if (selectedIndustry.guruPembimbing.size == 1) {
                     binding.etGuruPembimbingCompleteProfile.setText(selectedIndustry.guruPembimbing[0], false)
                     binding.etGuruPembimbingCompleteProfile.setAdapter(null)
