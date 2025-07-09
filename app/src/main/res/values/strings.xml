@@ -41,4 +41,10 @@
     <string name="logout">Logout</string>
     <string name="tile_document">Daily Log - Need to Repair</string>
     <string name="date_review">Reviewed: 2024-07-06</string>
+    <string name="hint_teachers_choice">Guru Pembimbing Kamu</string>
+    <string name="content_description_preview">Preview Image</string>
+    <string name="title_upload_page">Upload Dokumentasi</string>
+    <string name="text_form_title_dokumentation">Judul Dokumentasi</string>
+    <string name="title_form_description_documentation">Deskripsi Kegiatan</string>
+    <string name="btn_text_upload">Upload</string>
 </resources>
