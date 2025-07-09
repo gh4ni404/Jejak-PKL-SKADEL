@@ -9,7 +9,12 @@
         android:id="@+id/dashboardStudentFragment"
         android:name="com.smkn8bone.jejakpklskadel.ui.dashboard.DashboardStudentFragment"
         android:label="Dashboard Student"
-        tools:layout="@layout/fragment_dashboard_student" />
+        tools:layout="@layout/fragment_dashboard_student">
+
+        <action
+            android:id="@+id/action_dashboard_to_upload"
+            app:destination="@id/uploadFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/uploadFragment"
