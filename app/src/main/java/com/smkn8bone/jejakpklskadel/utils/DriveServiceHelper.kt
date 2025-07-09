@@ -67,6 +67,36 @@ object DriveServiceHelper {
         }.start()
     }
 
+    fun checkFolderDocumentation (
+        driveService: Drive,
+        parentFolderId: String,
+        onResult: (String?) -> Unit
+    ) {
+        Thread {
+            try {
+                val query = "name = 'Documentation' and mimeType = 'application/vnd.google-apps.folder' and '$parentFolderId' in parents and trashed = false"
+                val result = driveService.files().list().setQ(query).setSpaces("drive").setFields("files(id, name)").execute()
+
+                if (result.files.isNotEmpty()) {
+                    val folderId = result.files[0].id
+                    onResult(folderId)
+                } else {
+                    val metadata = File().apply {
+                        name = "Documentation"
+                        mimeType = "application/vnd.google-apps.folder"
+                        parents = listOf(parentFolderId)
+                    }
+
+                    val createdFolder = driveService.files().create(metadata).setFields("id").execute()
+                    onResult(createdFolder.id)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                onResult(null)
+            }
+        }.start()
+    }
+
 //    fun uploadFile (context: Context, driveService: Drive, javaFile: JavaFile, fileName: String, parentFolderId: String): String? {
     fun uploadFile (driveService: Drive, javaFile: JavaFile, fileName: String, parentFolderId: String): String? {
 //        val contentResolver = context.contentResolver
