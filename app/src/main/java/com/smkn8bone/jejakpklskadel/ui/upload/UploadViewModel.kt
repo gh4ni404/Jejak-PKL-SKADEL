@@ -21,7 +21,6 @@ class UploadViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var uploadedImageUri: String? = null
     private var currentName: String? = null
 
     private val _uploadState = MutableLiveData<UploadState>()
@@ -54,72 +53,17 @@ class UploadViewModel : ViewModel() {
             }
     }
 
-    fun uploadDocumentation(context: Context, title: String, description: String) {
-        val user = auth.currentUser
-        if (user == null) {
-            _uploadState.value = UploadState.Error("User tidak ditemukan")
-            return
-        }
-
-        // Validasi judul
-        if (title.isEmpty()) {
-            _uploadState.value = UploadState.Error("Judul tidak boleh kosong")
-            return
-        }
-        // Validasi deskripsi
-        if (description.isEmpty()) {
-            _uploadState.value = UploadState.Error("Deskripsi tidak boleh kosong")
-            return
-        }
-
-        // Simulasi proses upload
-        _uploadState.value = UploadState.Loading
-
-        // simpan metadata ke Firestore
-        uploadedImageUri?.let { saveMetadata(user.uid, it, title, description) }
-    }
-
-    fun uploadImageToDrive (
-        context: Context, uri: Uri, parentFolderId: String, onUploaded: (String?) -> Unit
-    ) {
-        val driveService = DriveServiceHelper.getDriveService(context)
-        if (driveService == null) {
-            onUploaded(null)
-            return
-        }
-
-        Thread {
-            try {
-                val compressedFile = FileUtils.compressImage(context, uri)
-                val uid = auth.currentUser?.uid ?: "nouser"
-                val safeName = currentName?.replace(" ","_")?.lowercase() ?: "anonymous"
-                val fileName = "profile_${safeName}_$uid.jpg"
-
-                val fileId = DriveServiceHelper.uploadFile(driveService, compressedFile, fileName, parentFolderId)
-//                val fileUrl = "https://drive.google.com/uc?id=$fileId"
-
-                onUploaded(fileId)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                onUploaded(null)
-            }
-        }.start()
-    }
-
-    fun setUploadedImageUri (uri: String?) {
-        uploadedImageUri = uri
-    }
-
-    private fun saveMetadata(uid: String, imageUrl: String, title: String, description: String) {
+    private fun saveMetadata(uid: String, name: String, kelas: String, imageUrl: String, title: String, description: String) {
         val timeStamp = System.currentTimeMillis()
         val metadata = hashMapOf(
             "uid" to uid,
+            "nama" to name,
+            "kelas" to kelas,
             "imageUrl" to imageUrl,
             "title" to title,
             "description" to description,
             "time" to timeStamp
         )
-
 
         firestore.collection("upload_logs")
             .add(metadata)
@@ -129,6 +73,69 @@ class UploadViewModel : ViewModel() {
             .addOnFailureListener { e ->
                 _uploadState.value = UploadState.Error(e.message ?: "Gagal menyimpan data ke firestore")
             }
+    }
+
+    fun uploadFullDocumentation(
+        context: Context,
+        imageUri: Uri,
+        title: String,
+        description: String,
+        userName: String,
+        className: String,
+        parentFolderId: String
+    ) {
+        val driveService = DriveServiceHelper.getDriveService(context)
+        val uid = auth.currentUser?.uid
+
+        if (driveService == null || uid == null) {
+            _uploadState.postValue(UploadState.Error("Gagal mengakses Google Drive"))
+            return
+        }
+
+        _uploadState.postValue(UploadState.Loading)
+
+        Thread {
+            try {
+                val compressedFile = FileUtils.compressImage(context, imageUri)
+                val fileName = DriveServiceHelper.generateFileName(title, userName, uid)
+
+                // 1. Cek folder root: Documentation
+                DriveServiceHelper.checkFolderDocumentation(driveService, "Documentation", parentFolderId) { rootId ->
+                    if (rootId == null) {
+                        _uploadState.postValue(UploadState.Error("Folder 'Documentation' tidak ditemukan"))
+                        return@checkFolderDocumentation
+                    }
+
+                    // 2. Cek folder kelas
+                    DriveServiceHelper.checkFolderClass(driveService, className, rootId) { classFolderId ->
+                        if (classFolderId == null) {
+                            _uploadState.postValue(UploadState.Error("Folder kelas tidak ditemukan"))
+                            return@checkFolderClass
+                        }
+
+                        // 3. Cek folder nama siswa
+                        DriveServiceHelper.checkFolderStudent(driveService, userName, classFolderId) { studentFolderId ->
+                            if (studentFolderId == null) {
+                                _uploadState.postValue(UploadState.Error("Folder siswa tidak ditemukan"))
+                                return@checkFolderStudent
+                            }
+
+                            // 4. Upload gambar ke folder siswa
+                            val uploadedFileId = DriveServiceHelper.uploadFile(driveService, compressedFile, fileName, studentFolderId)
+
+                            if (uploadedFileId != null) {
+                                saveMetadata(uid, userName,className, uploadedFileId, title, description)
+                            } else {
+                                _uploadState.postValue(UploadState.Error("Gagal mengunggah gambar"))
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _uploadState.postValue(UploadState.Error("Terjadi kesalahan saat mengunggah"))
+            }
+        }.start()
     }
 
     fun resetUploadState() {
