@@ -14,43 +14,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.smkn8bone.jejakpklskadel.R
 import com.smkn8bone.jejakpklskadel.databinding.FragmentUploadBinding
 import com.smkn8bone.jejakpklskadel.utils.CameraUtils
-import com.smkn8bone.jejakpklskadel.utils.DriveServiceHelper
 import java.io.File
 
 class UploadFragment : Fragment() {
-
     private var _binding: FragmentUploadBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: UploadViewModel by viewModels()
 
     private lateinit var cameraUtils: CameraUtils
     private var imageFile: File? = null
     private lateinit var cameraImageUri: Uri
     private var selectedImageUri: Uri? = null
-
-    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success) {
-            binding.ivPreviewUpload.setImageURI(cameraImageUri)
-            selectedImageUri = cameraImageUri
-            uploadSelectedImage()
-        }
-    }
-    private val pickGalleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            binding.ivPreviewUpload.setImageURI(it)
-            selectedImageUri = it
-            uploadSelectedImage()
-        }
-    }
-
-    private val requestCamera = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-        if (isGranted) {
-            openCamera()
-        } else {
-            Toast.makeText(requireContext(), "Izin Kamera ditolak", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,47 +43,62 @@ class UploadFragment : Fragment() {
         setupListeners()
     }
 
+    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            binding.ivPreviewUpload.setImageURI(cameraImageUri)
+            selectedImageUri = cameraImageUri
+//            uploadSelectedImage()
+        }
+    }
+    private val pickGalleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            binding.ivPreviewUpload.setImageURI(it)
+            selectedImageUri = it
+//            uploadSelectedImage()
+        }
+    }
+    private val requestCamera = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            openCamera()
+        } else {
+            Toast.makeText(requireContext(), "Izin Kamera ditolak", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun setupObservers() {
         // Nanti akan digunakan untuk memantau status upload, loading, dll
         viewModel.uploadState.observe(viewLifecycleOwner) { state ->
-             // Tampilkan status sesuai keadaan (misal loading, sukses, gagal)
-            viewModel.uploadState.observe(viewLifecycleOwner) { state ->
-                when (state) {
-                    is UploadViewModel.UploadState.Loading -> {
-                        binding.loadingOverlay.show()
-                        binding.btnUpload.isEnabled = true
-                    }
-                    is UploadViewModel.UploadState.Success -> {
-                        binding.loadingOverlay.hide()
-                        binding.btnUpload.isEnabled = false
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
-//                        reset form
-                        selectedImageUri = null
-                        binding.etTitleUpload.setText("")
-                        binding.etDescriptionUpload.setText("")
-                        binding.ivPreviewUpload.setImageResource(R.drawable.ic_image_placeholder)
+            // Tampilkan status sesuai keadaan (misal loading, sukses, gagal)
+            when (state) {
+                is UploadViewModel.UploadState.Loading -> {
+                    binding.loadingOverlay.show()
+                    binding.btnUpload.isEnabled = false
+                }
+                is UploadViewModel.UploadState.Success -> {
+                    binding.loadingOverlay.hide()
+                    binding.btnUpload.isEnabled = true
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                    // reset form
+                    resetForm()
+                    viewModel.resetUploadState()
+                }
+                is UploadViewModel.UploadState.Error -> {
+                    binding.loadingOverlay.hide()
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
 
-                        viewModel.resetUploadState()
-                    }
-                    is UploadViewModel.UploadState.Error -> {
-                        binding.loadingOverlay.hide()
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                        Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
-
-                        viewModel.resetUploadState()
-                    }
-                    UploadViewModel.UploadState.Idle -> {
-                        binding.loadingOverlay.hide()
-                        binding.btnUpload.isEnabled = false
-                    }
+                    viewModel.resetUploadState()
+                }
+                UploadViewModel.UploadState.Idle -> {
+                    binding.loadingOverlay.hide()
+                    binding.btnUpload.isEnabled = false
                 }
             }
         }
     }
 
     private fun setupListeners() {
-
         val options = arrayOf("Kamera", "Galeri")
         val alertDialogUpload = AlertDialog
             .Builder(requireContext())
@@ -151,7 +140,22 @@ class UploadFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            viewModel.uploadDocumentation(requireContext(), titleDocumented, description)
+            viewModel.fetchUserData { name, _, _, kelas, _, _, _, _ ->
+                if (name != null && kelas != null) {
+                    val sharedFolderId = "1euMwZDqrcKembVtpnim5pI0AMBwQqU-3"
+                    viewModel.uploadFullDocumentation(
+                        context = requireContext(),
+                        imageUri = selectedImageUri!!,
+                        title = titleDocumented,
+                        description = description,
+                        userName = name,
+                        className = kelas,
+                        parentFolderId = sharedFolderId
+                    )
+                } else {
+                    Toast.makeText(requireContext(), "Data pengguna tidak lengkap", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -165,33 +169,11 @@ class UploadFragment : Fragment() {
         takePictureLauncher.launch(cameraImageUri)
     }
 
-    private fun uploadSelectedImage() {
-        val uri = selectedImageUri ?: return
-        val driveService = DriveServiceHelper.getDriveService(requireContext()) ?: return
-        val sharedFolderId = "1euMwZDqrcKembVtpnim5pI0AMBwQqU-3"
-
-        binding.loadingOverlay.show()
-        DriveServiceHelper.checkFolderDocumentation(driveService, sharedFolderId) { folderId ->
-            folderId?.let {
-                viewModel.uploadImageToDrive(requireContext(), uri, it) { imageUri ->
-                    requireActivity().runOnUiThread {
-
-                        if(imageUri != null) {
-                            binding.loadingOverlay.hide()
-                            viewModel.setUploadedImageUri(imageUri)
-                        } else {
-                            binding.loadingOverlay.show()
-                            Toast.makeText(requireContext(), "Gagal upload gambar", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            } ?: run {
-                requireActivity().runOnUiThread {
-                    binding.loadingOverlay.show()
-                    Toast.makeText(requireContext(), "Folder tidak ditemukan", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+    private fun resetForm() {
+        selectedImageUri = null
+        binding.etTitleUpload.setText("")
+        binding.etDescriptionUpload.setText("")
+        binding.ivPreviewUpload.setImageResource(R.drawable.ic_image_placeholder)
     }
 
     override fun onDestroyView() {
