@@ -16,6 +16,6 @@
     <attr name="linkTextColor" format="color" />
     <attr name="colorOutlineOnSurface" format="color" />
     <attr name="colorOverlayDim" format="color" />
-
+    <attr name="colorOverlayUp" format="color" />
 
 </resources>
