@@ -125,4 +125,17 @@
         <item name="android:layout_height">150dp</item>
         <item name="cardBackgroundColor">?attr/colorSurface</item>
     </style>
+
+    <!-- styles.xml -->
+    <style name="Widget.App.TextInputLayout.RoundedDark" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxBackgroundColor">?attr/colorSurfaceContainer</item>
+
+    </style>
+
 </resources>
