@@ -1,12 +1,9 @@
 package com.smkn8bone.jejakpklskadel.ui.completeprofile
 
-import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,31 +11,24 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.R
 import com.smkn8bone.jejakpklskadel.MainActivity
 import com.smkn8bone.jejakpklskadel.databinding.FragmentCompleteProfileBinding
+import com.smkn8bone.jejakpklskadel.utils.CameraUtils
 import com.smkn8bone.jejakpklskadel.utils.DriveServiceHelper
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class CompleteProfileFragment : Fragment() {
     private var _binding: FragmentCompleteProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CompleteProfileViewModel by viewModels()
 
+    private lateinit var cameraUtils: CameraUtils
+    private var imageFile: File? = null
     private lateinit var cameraImageUri: Uri
     private var selectedImageUri: Uri? = null
-
-//    private val dataKelas = mapOf (
-//        "XII DKV" to Pair ("Desain Komunikasi Visual", listOf("Item A", "Item B", "Item C")),
-//        "XII MPLB" to Pair ("Manajemen Perkantoran dan Layanan Bisnis", listOf("Item 1", "Item 2", "Item 3")),
-//        "XII AT" to Pair ("Agribisnis Tanaman", listOf("Item I", "Item II", "Item III"))
-//    )
 
     private val dataKelas = mapOf (
         "XII DKV" to KelasData ("Desain Komunikasi Visual",
@@ -126,6 +116,8 @@ class CompleteProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        cameraUtils = CameraUtils
+
         setupDropdowns()
         setupProfileImageSelection()
         observeUserData()
@@ -168,7 +160,7 @@ class CompleteProfileFragment : Fragment() {
         val classList = dataKelas.keys.toList()
         val adapterClass = ArrayAdapter (
             requireContext(),
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            R.layout.support_simple_spinner_dropdown_item,
             classList
         )
         binding.etClassCompleteProfile.setAdapter (adapterClass)
@@ -178,7 +170,7 @@ class CompleteProfileFragment : Fragment() {
             val industri = kelasData.industri.map { it.namaIndustri }
             val adapterIndustri = ArrayAdapter (
                 requireContext(),
-                com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+                R.layout.support_simple_spinner_dropdown_item,
                 industri
             )
 
@@ -190,7 +182,7 @@ class CompleteProfileFragment : Fragment() {
                 val selectedIndustry = kelasData.industri[industryPosition]
                 val adapterGuru = ArrayAdapter (
                     requireContext(),
-                    com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+                    R.layout.support_simple_spinner_dropdown_item,
                     selectedIndustry.guruPembimbing
                 )
 
@@ -203,15 +195,13 @@ class CompleteProfileFragment : Fragment() {
                     binding.etGuruPembimbingCompleteProfile.setAdapter(adapterGuru)
                     binding.etGuruPembimbingCompleteProfile.setText("", false)
                 }
-
-
             }
         }
 
         val dataSekolah = listOf ("SMKN 8 Bone")
         val adapterSekolah = ArrayAdapter (
             requireContext(),
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            R.layout.support_simple_spinner_dropdown_item,
             dataSekolah
         )
         binding.etSekolahCompleteProfile.setAdapter (adapterSekolah)
@@ -224,7 +214,10 @@ class CompleteProfileFragment : Fragment() {
             .setTitle ("Pilih sumber gambar")
             .setItems (options) { _, which ->
                 when (which) {
-                    0 -> checkCamera()
+                    0 -> cameraUtils.checkAndRequestCameraPermission(
+                        this, requestCamera,
+                        onGranted = { openCamera() }
+                    )
                     1 -> openGallery()
                 }
             }
@@ -247,47 +240,14 @@ class CompleteProfileFragment : Fragment() {
         }
     }
 
-    private fun checkCamera() {
-        when {
-            ContextCompat.checkSelfPermission (requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
-                openCamera()
-            }
-            shouldShowRequestPermissionRationale (Manifest.permission.CAMERA) -> {
-                AlertDialog.Builder (requireContext())
-                    .setTitle ("Izin Kamera Dibutuhkan")
-                    .setMessage ("Jejak PKL SKADEL membutuhkan izin kamera untuk mengambil foto")
-                    .setPositiveButton ("OK") { _, _ -> requestCamera.launch (Manifest.permission.CAMERA) }
-                    .setNegativeButton ("Batal") { dialog, _ -> dialog.dismiss() }
-                    .show()
-            }
-            else -> {
-                requestCamera.launch (Manifest.permission.CAMERA)
-            }
-        }
-    }
-
     private fun openGallery() {
         pickGalleryLauncher.launch("image/*")
     }
 
     private fun openCamera() {
-        val imageFile = createImageFile()
-        cameraImageUri = FileProvider.getUriForFile(
-            requireContext(),
-            "${requireContext().packageName}.provider",
-            imageFile
-        )
+        imageFile = cameraUtils.createImageFile(requireContext())
+        cameraImageUri = cameraUtils.getUriForFile(requireContext(), imageFile!!)
         takePictureLauncher.launch(cameraImageUri)
-    }
-
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "JPEG_${timeStamp}",
-            ".jpg",
-            storageDir
-        )
     }
 
     private fun uploadSelectedImage() {
